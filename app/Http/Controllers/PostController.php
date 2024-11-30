@@ -21,7 +21,7 @@ class PostController extends Controller
 
     public function getPosts(Request $request, PostService $postService){
         try {
-            $posts = $postService->getPosts($request->user());
+            $posts = $postService->getPosts();
             return response()->json(['success' => true,'data' => $posts], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);

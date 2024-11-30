@@ -38,7 +38,7 @@ class PostService
         return $post;
     }
 
-    public function getPosts(User $user){
+    public function getPosts(){
         return Post::with('getFirstImage')->paginate(5);
     }
 }
