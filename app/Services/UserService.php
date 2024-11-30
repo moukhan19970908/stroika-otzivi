@@ -64,12 +64,19 @@ class UserService
 
     public function updateProfile($user, $data)
     {
-        $user->fio = $data['fio'];
-        $user->email = $data['email'];
-        $user->phone = $data['phone'];
-        $user->experience = $data['experience'];
-        $user->save();
-        return true;
+        $anyUser = User::where('id', '!=', $user->id)->where('email',$data['email'])->first();
+        if ($anyUser){
+            throw new \Exception('Такой email уже занят');
+        }
+        try{
+            $user->fio = $data['fio'];
+            $user->email = $data['email'];
+            $user->phone = $data['phone'];
+            $user->save();
+            return true;
+        }catch (\Exception $e){
+            throw new \Exception($e->getMessage());
+        }
     }
 
     public function uploadAvatar($user, $file)

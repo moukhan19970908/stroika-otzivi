@@ -26,4 +26,16 @@ class PasswordRequest extends FormRequest
             'new_password' => 'required|string|min:8|max:50',
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'current_password.required' => 'Пожалуйста, введите текущий пароль',
+            'current_password.min' => 'Пароль должен быть минимум 8 символов',
+            'current_password.max' => 'Пароль должен быть не более 50 символов',
+            'new_password.required' => 'Пожалуйста, введите новый пароль',
+            'new_password.min' => 'Пароль должен быть минимум 8 символов',
+            'new_password.max' => 'Пароль должен быть не более 50 символов',
+        ];
+    }
 }

@@ -25,7 +25,6 @@ class ChangeRequest extends FormRequest
             'fio' => ['required', 'string', 'max:255'],
             'phone' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255'],
-            'user_type_id' => ['required', 'integer'],
         ];
     }
 }

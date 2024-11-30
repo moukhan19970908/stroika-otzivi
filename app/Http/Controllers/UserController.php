@@ -29,7 +29,7 @@ class UserController extends Controller
         try {
             return response()->json(['token' => $userService->login($request->get('email'), $request->get('password'))]);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e], 500);
+            return response()->json(['message' => $e->getMessage()], 500);
         }
     }
 
@@ -54,7 +54,7 @@ class UserController extends Controller
             $userService->updateProfile($request->user(), $request->all());
             return response()->json(['success' => 'Профиль успешно изменен'], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => $e], 500);
+            return response()->json(['message' => $e->getMessage()], 500);
         }
     }
 
