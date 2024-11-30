@@ -51,6 +51,7 @@ class RegistartionRequest extends FormRequest
             'phone.string' => 'Телефон должен быть текстовым',
             'phone.max' => 'Телефон не может превышать 20 символов',
             'phone.required' => 'Телефон обязтель для заполнения',
+            'phone.unique' => 'Этот телефон уже используется',
             'user_type_id.required' => 'Тип пользователя обязатен для заполнения',
             'user_type_id.exists' => 'Тип пользователя не существует',
         ];

@@ -17,7 +17,7 @@ class UserService
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'user_type_id' => $data['user_type_id'],  // 1 - master, 2 - rieltor, 3 - client,
-            'experience' => $data['experience'],
+            'experience' => $data['experience'] ?? false,
             'phone' => $data['phone'],
         ];
         $user = User::create($data);
