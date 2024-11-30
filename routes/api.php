@@ -21,9 +21,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/uploadAvatar', [UserController::class, 'uploadAvatar']);
     Route::post('/upload', [ImageController::class, 'upload']);
     Route::post('/uploadComment', [ImageController::class, 'uploadComment']);
-    Route::get('/getPosts', [PostController::class, 'getPosts']);
-    Route::get('/getPostById/{id}', [PostController::class, 'getPostById']);
 });
+Route::get('/getPosts', [PostController::class, 'getPosts']);
+Route::get('/getPostById/{id}', [PostController::class, 'getPostById']);
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:client']], function () {
     Route::post('/createPost', [PostController::class, 'createPost']);
