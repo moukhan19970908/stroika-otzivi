@@ -53,7 +53,7 @@ class UserService
             $posts = Post::where('user_id', $user->id)->pluck('id')->toArray();
             return [
                 'user' => $user,
-                'comment_count' => MasterComment::whereIn('post_id', $posts)->count(),
+                'post' => Post::with(['images','masterComments.user','rieltorComments.user'])->where('user_id', $user->id)->get(),
             ];
 
         }

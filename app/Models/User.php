@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Notifications\Notifiable;
+use Laravel\Sanctum\HasApiTokens;
 use Orchid\Filters\Types\Like;
 use Orchid\Filters\Types\Where;
 use Orchid\Filters\Types\WhereDateStartEnd;
@@ -9,6 +12,7 @@ use Orchid\Platform\Models\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    use HasApiTokens,Notifiable;
     /**
      * The attributes that are mass assignable.
      *
@@ -66,4 +70,8 @@ class User extends Authenticatable
         'updated_at',
         'created_at',
     ];
+
+    public function comments(): HasMany{
+        return $this->hasMany(BlogComment::class, 'user_id');
+    }
 }

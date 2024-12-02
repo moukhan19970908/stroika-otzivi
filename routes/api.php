@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
@@ -22,6 +23,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/uploadAvatar', [UserController::class, 'uploadAvatar']);
     Route::post('/upload', [ImageController::class, 'upload']);
     Route::post('/uploadComment', [ImageController::class, 'uploadComment']);
+    //blog
+    Route::post('/addCommentToBlog',[BlogController::class,'addComment']);
 });
 //blogs
 Route::get('/getPosts', [PostController::class, 'getPosts']);
@@ -29,6 +32,9 @@ Route::get('/getPostById/{id}', [PostController::class, 'getPostById']);
 //posts
 Route::get('/getBlogs',[BlogController::class,'getBlogs']);
 Route::get('/getBlogById/{id}', [BlogController::class,'getBlogById']);
+
+Route::get('/getProfile/{id}',[GuestController::class, 'getProfile']);
+Route::get('/getUserComments/{id}',[GuestController::class, 'getUserComments']);
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:client']], function () {
     Route::post('/createPost', [PostController::class, 'createPost']);

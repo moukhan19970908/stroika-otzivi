@@ -67,4 +67,6 @@ class UserController extends Controller
             return response()->json(['message' => $e], 500);
         }
     }
+
+
 }

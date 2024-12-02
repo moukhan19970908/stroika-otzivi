@@ -29,7 +29,7 @@ class PostController extends Controller
     }
 
     public function getPostById($id){
-        return Post::with(['images','user'])->find($id);
+        return Post::with(['images','user','masterComments.user','rieltorComments.user'])->find($id);
     }
 
 }
