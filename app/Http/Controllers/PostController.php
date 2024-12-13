@@ -53,7 +53,7 @@ class PostController extends Controller
     }
 
     public function search(Request $request){
-        return response()->json(['success' => true,'data' => Post::with(['images', 'user', 'masterComments.user', 'rieltorComments.user'])->whereAny([
+        return response()->json(['success' => true,'data' => Post::with(['getFirstImage', 'user'])->whereAny([
             'title',
             'description',
             'address',
