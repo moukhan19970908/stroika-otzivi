@@ -52,4 +52,12 @@ class PostController extends Controller
         return Post::with(['images', 'user', 'masterComments.user', 'rieltorComments.user'])->find($id);
     }
 
+    public function search(Request $request){
+        return response()->json(['success' => true,'data' => Post::with(['images', 'user', 'masterComments.user', 'rieltorComments.user'])->whereAny([
+            'title',
+            'description',
+            'address',
+        ], 'like', '%'.$request->get('query').'%')->paginate(20)]);
+    }
+
 }

@@ -25,19 +25,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/upload', [ImageController::class, 'upload']);
     Route::post('/uploadComment', [ImageController::class, 'uploadComment']);
     //blog
-    Route::post('/addCommentToBlog',[BlogController::class,'addComment']);
+    Route::post('/addCommentToBlog', [BlogController::class, 'addComment']);
 });
 //blogs
 Route::get('/getPosts', [PostController::class, 'getPosts']);
-Route::get('/getNearestPosts',[PostController::class, 'getNearestPosts']);
-Route::get('/topPosts',[PostController::class, 'topPosts']);
+Route::get('/getNearestPosts', [PostController::class, 'getNearestPosts']);
+Route::get('/topPosts', [PostController::class, 'topPosts']);
+Route::get('/search', [PostController::class, 'search']);
 Route::get('/getPostById/{id}', [PostController::class, 'getPostById']);
 //posts
-Route::get('/getBlogs',[BlogController::class,'getBlogs']);
-Route::get('/getBlogById/{id}', [BlogController::class,'getBlogById']);
+Route::get('/getBlogs', [BlogController::class, 'getBlogs']);
+Route::get('/getBlogById/{id}', [BlogController::class, 'getBlogById']);
 
-Route::get('/getProfile/{id}',[GuestController::class, 'getProfile']);
-Route::get('/getUserComments/{id}',[GuestController::class, 'getUserComments']);
+Route::get('/getProfile/{id}', [GuestController::class, 'getProfile']);
+Route::get('/getUserComments/{id}', [GuestController::class, 'getUserComments']);
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:client']], function () {
     Route::post('/createPost', [PostController::class, 'createPost']);

@@ -17,8 +17,7 @@ class BlogController extends Controller
     }
 
     public function getBlogById($id){
-        $blog =  Blog::with(['comments.user'])->where('id', $id)->first();
-        return $blog;
+        return Blog::with(['comments.user'])->where('id', $id)->first();
     }
 
     public function addComment(BlogAddCommentRequest $request){
