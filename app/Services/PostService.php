@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Models\Post;
 use App\Models\PostImage;
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 
 class PostService
@@ -38,7 +39,25 @@ class PostService
         return $post;
     }
 
-    public function getPosts(){
-        return Post::with('getFirstImage')->paginate(5);
+    public function getPosts()
+    {
+        return Post::with('getFirstImage')->paginate(20);
+    }
+
+    public function getNearestPosts($latitude, $longitude, $radius = 200, $perPage = 20, $currentPage = 1)
+    {
+        $posts = Post::select('*')
+            ->selectRaw(
+                '(6371 * ACOS(
+            COS(RADIANS(?)) * COS(RADIANS(latitude)) *
+            COS(RADIANS(longitude) - RADIANS(?)) +
+            SIN(RADIANS(?)) * SIN(RADIANS(latitude))
+        )) AS distance',
+                [$latitude, $longitude, $latitude]
+            )
+            ->with(['getFirstImage','user'])
+            ->orderBy('distance', 'asc')// Сортировка по расстоянию
+            ->paginate(20);
+        return $posts;
     }
 }

@@ -15,6 +15,7 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/getUserTypes', [UserController::class, 'getUserTypes']);
 Route::post('/registration', [UserController::class, 'registration']);
+Route::post('/verify', [UserController::class, 'verify']);
 Route::post('/login', [UserController::class, 'login']);
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/profile', [UserController::class, 'profile']);
@@ -28,6 +29,8 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 //blogs
 Route::get('/getPosts', [PostController::class, 'getPosts']);
+Route::get('/getNearestPosts',[PostController::class, 'getNearestPosts']);
+Route::get('/topPosts',[PostController::class, 'topPosts']);
 Route::get('/getPostById/{id}', [PostController::class, 'getPostById']);
 //posts
 Route::get('/getBlogs',[BlogController::class,'getBlogs']);
