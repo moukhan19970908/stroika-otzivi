@@ -18,7 +18,10 @@ class UserService
     {
         DB::beginTransaction();
         $exist = User::where('phone',$data['phone'])->first();
-        if (!$exist || ($exist && !$exist->verified)) {
+        if ($exist && $exist->verified){
+            throw new \Exception('Ваш телефон уже зарегистрирован');
+        }
+        if (!$exist) {
             $data = [
                 'fio' => $data['fio'],
                 'email' => $data['email'],
@@ -33,8 +36,6 @@ class UserService
                 DB::rollBack();
                 throw new \Exception('Произошла ошибка при создании пользователя');
             }
-        }else if($exist->verified){
-            throw new \Exception('Ваш телефон уже зарегистрирован');
         }
         $code = rand(1000, 9999);
         $send = $this->sendMesssage($code, $data['phone']);

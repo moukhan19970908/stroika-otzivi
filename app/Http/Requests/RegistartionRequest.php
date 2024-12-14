@@ -23,8 +23,8 @@ class RegistartionRequest extends FormRequest
     {
         return [
             'fio' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
-            'phone' => 'required|string|max:20|unique:users',
+            'email' => 'required|string|email|max:255',
+            'phone' => 'required|string|max:20',
             'user_type_id' => 'required|exists:user_types,id',
             'password' => 'required|string|min:8',
             'experience' => [
