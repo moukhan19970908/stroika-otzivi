@@ -17,8 +17,12 @@ class GuestService
             return [
                 'user' => $user,
                 'comment_count' => MasterComment::whereIn('post_id', $posts)->count(),
+                'emotion_rating' => MasterComment::avg('emotion_rating'),
+                'payment_rating' => MasterComment::avg('payment_rating'),
+                'quality_rating' => MasterComment::avg('quality_rating'),
+                'delivery_rating' => MasterComment::avg('delivery_rating'),
+                'honesty_rating' => MasterComment::avg('honesty_rating'),
             ];
-
         }
         return [
             'user' => $user,
