@@ -11,7 +11,7 @@ class ImageController extends Controller
     {
         $folder = date('d.m.Y');
         $path = $request->file->store($folder . '/posts', 'public');
-        $image = PostImage::create(['image_path' => env('APP_URL').'/storage/'.$path]);
+        $image = PostImage::create(['image_path' => '/storage/'.$path]);
         return response()->json(['success' => true, 'image_id' => $image->id], 200);
     }
 
@@ -19,7 +19,7 @@ class ImageController extends Controller
     {
         $folder = date('d.m.Y');
         $path = $request->file->store($folder . '/posts/comments', 'public');
-        $image = PostImage::create(['image_path' => env('APP_URL').'/storage/'.$path]);
+        $image = PostImage::create(['image_path' => '/storage/'.$path]);
         return response()->json(['success' => true, 'image_id' => $image->id], 200);
     }
 }

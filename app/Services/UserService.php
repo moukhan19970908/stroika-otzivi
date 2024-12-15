@@ -143,7 +143,7 @@ class UserService
     public function uploadAvatar($user, $file)
     {
         $path = $file->store('avatars', 'public');
-        $user->avatar = env('APP_URL') . '/storage/' . $path;
+        $user->avatar = '/storage/' . $path;
         $user->save();
         return $path;
     }
