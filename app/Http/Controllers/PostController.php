@@ -30,6 +30,15 @@ class PostController extends Controller
         }
     }
 
+    public function getOwnPosts(Request $request, PostService $postService){
+        try {
+            $posts = $postService->getOwnPosts($request->user()->id);
+            return response()->json(['success' => true, 'data' => $posts], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()], 500);
+        }
+    }
+
     public function getNearestPosts(NearPostRequest $request, PostService $postService)
     {
         try {

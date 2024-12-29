@@ -34,15 +34,14 @@ Route::get('/topPosts', [PostController::class, 'topPosts']);
 Route::get('/search', [PostController::class, 'search']);
 Route::get('/getPostById/{id}', [PostController::class, 'getPostById']);
 //posts
-Route::get('/getBlogs', [BlogController::class, 'getBlogs']);
-Route::get('/getBlogById/{id}', [BlogController::class, 'getBlogById']);
+
 
 Route::get('/getProfile/{id}', [GuestController::class, 'getProfile']);
 Route::get('/getUserComments/{id}', [GuestController::class, 'getUserComments']);
+Route::get('searchAddress',[GuestController::class,'searchAddress']);
 
-Route::group(['middleware' => ['auth:sanctum', 'abilities:client']], function () {
-    Route::post('/createPost', [PostController::class, 'createPost']);
-});
+Route::post('/createPost', [PostController::class, 'createPost'])->middleware(['auth:sanctum','ability:client,master']);
+Route::get('/getOwnPosts',[PostController::class,'getOwnPosts'])->middleware(['auth:sanctum','ability:client,master']);
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:rieltor']], function () {
     Route::post('/addRieltorComment', [CommentController::class, 'addRieltorComment']);
@@ -50,4 +49,6 @@ Route::group(['middleware' => ['auth:sanctum', 'abilities:rieltor']], function (
 
 Route::group(['middleware' => ['auth:sanctum', 'abilities:master']], function () {
     Route::post('/addMasterComment', [CommentController::class, 'addMasterComment']);
+    Route::get('/getBlogs', [BlogController::class, 'getBlogs']);
+    Route::get('/getBlogById/{id}', [BlogController::class, 'getBlogById']);
 });

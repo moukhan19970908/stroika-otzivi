@@ -24,7 +24,7 @@ class RegistartionRequest extends FormRequest
         return [
             'fio' => 'required|string|max:255',
             'email' => 'required|string|email|max:255',
-            'phone' => 'required|string|max:20',
+            'phone' => 'required|string|min:11|max:11',
             'user_type_id' => 'required|exists:user_types,id',
             'password' => 'required|string|min:8',
             'experience' => [
@@ -49,11 +49,14 @@ class RegistartionRequest extends FormRequest
             'password.string' => 'Пароль должен быть текстовым',
             'password.min' => 'Пароль должен быть не менее 8 символов',
             'phone.string' => 'Телефон должен быть текстовым',
-            'phone.max' => 'Телефон не может превышать 20 символов',
+            'phone.min' => 'Телефон не может превышать 11 символов',
+            'phone.max' => 'Телефон не может превышать 11 символов',
             'phone.required' => 'Телефон обязтель для заполнения',
             'phone.unique' => 'Этот телефон уже используется',
             'user_type_id.required' => 'Тип пользователя обязатен для заполнения',
             'user_type_id.exists' => 'Тип пользователя не существует',
+            'user_type_id.required_if' => 'Опыт работы обязателен для зарегистрированных пользователей',
+            'experience.required_if' => 'Опыт работы обязателен для зарегистрированных пользователей',
         ];
     }
 }

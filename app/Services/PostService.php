@@ -44,6 +44,10 @@ class PostService
         return Post::with('getFirstImage')->paginate(20);
     }
 
+    public function getOwnPosts(int $userId){
+        return Post::with('getFirstImage')->where('user_id', $userId)->get();
+    }
+
     public function getNearestPosts($latitude, $longitude, $radius = 200, $perPage = 20, $currentPage = 1)
     {
         $posts = Post::select('*')
